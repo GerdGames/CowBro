@@ -22,6 +22,7 @@ void loop()
     if(ardu.nextFrame())
     {
       ardu.clear();
+      
       //to get movement input, to move Cowbro and change frames on his animation
       if((ardu.pressed(RIGHT_BUTTON))&&(x < 112))
       {
@@ -43,6 +44,7 @@ void loop()
         y += 2;
         frame += 1;
       }
+      
       //to get shooting input and start shooting a bullet
       if((ardu.pressed(B_BUTTON)) && (!bulletActive))
       {
@@ -52,7 +54,9 @@ void loop()
       {
         bullet(x + 12, y + 8);
       }
-      if(frame > 2)
+      
+      //to animate the sprite
+      if(frame >= 2)
       {
         ardu.drawBitmap(x, y, cowBro, 16, 16, WHITE);
       }
@@ -67,12 +71,13 @@ void loop()
       ardu.display();
     }
 }
+//The purpose of this method is to create and move bullet objects
 void bullet(int bulletX, int bulletY)
 {
-  for(int count = 0; count < 64; count += 2)
-  {
-    ardu.drawBitmap(bulletX + count, bulletY, bulletSprite, bulletX + 8 + count, bulletY + 8, WHITE);
-  }
   bulletActive = false;
+  for(int count = 0; count < 128; count += 2)
+  {
+    ardu.drawBitmap(bulletX + count, bulletY, bulletSprite, 8, 3, WHITE);
+  }
 }
 
