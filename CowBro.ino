@@ -136,6 +136,7 @@ void loop()
         {
           count++;
         }
+        unpauseCooldown = false;
       }
       //to create and move the bullet
       if(bulletActive)
