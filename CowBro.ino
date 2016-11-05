@@ -2,8 +2,6 @@
 #include "bitmaps.h"
 
 Arduboy ardu;
-ArduboyAudio arduAudio;
-ArduboyTunes arduTunes;
 
 int x, y, bulletX, bulletY, targetX, targetY, bonusX, bonusY, level;
 int frame = 0;
@@ -29,7 +27,7 @@ void setup()
 {
   // put your setup code here, to run once:
    ardu.begin();
-   arduAudio.begin();
+   ardu.audio.begin();
    ardu.setFrameRate(60);
 }
 
@@ -80,12 +78,12 @@ void loop()
       //to return the state of sound
       if(soundStatus)
       {
-        arduAudio.on();
+        ardu.audio.on();
         sound = "on";
       }
       else
       {
-        arduAudio.off();
+        ardu.audio.off();
         sound = "off";
       }
       //to see if the game can be started
@@ -160,7 +158,7 @@ void loop()
          {
             timeLeft += 5;
             bonusActive = false;
-            arduTunes.tone(500, 100);
+            ardu.tunes.tone(500, 100);
          }
          if(bonusY > 64)
          {
@@ -188,7 +186,7 @@ void loop()
             bulletActive = false;
             targetActive = false;
             levelUp = false;
-            arduTunes.tone(300, 100);
+            ardu.tunes.tone(300, 100);
             score++;
          }
       
@@ -221,7 +219,7 @@ void loop()
             front = true;
             bulletX = x + 12;
             bulletY = y + 9;
-            arduTunes.tone(100, 100);
+            ardu.tunes.tone(100, 100);
          }
          if((ardu.pressed(A_BUTTON)) && (!bulletActive) && (!bulletCooldown))
          {
@@ -229,7 +227,7 @@ void loop()
             front = false;
             bulletX = x + 2;
             bulletY = y + 9;
-            arduTunes.tone(100, 100);
+            ardu.tunes.tone(100, 100);
          }
         //to create and move the bullet
          if(bulletActive)
